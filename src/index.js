@@ -14,10 +14,13 @@ async function getJSONData(data) {
 }
 
 function changeTodayWeather(dataJSON) {
-    nameOfCity.textContent = localStorage.getItem("cityInfo");
-    todayDegrees.textContent = `${dataJSON.days[0].temp} ${temperatureZone}`;
+    if (localStorage.getItem("cityInfo")) {
+        nameOfCity.textContent = localStorage.getItem("cityInfo");
+    }
+    todayDegrees.textContent = `${dataJSON.days[0].temp} ${temperatureZone} ${getConditionEmoji(dataJSON.days[0].conditions)}`;
     todayWeather.textContent = dataJSON.days[0].conditions;
-    todaySentence.textContent = dataJSON.description;
+    todaySentence.textContent = dataJSON.days[0].description;
+    todayDate.textContent = dataJSON.days[0].datetime;
 
     fetch(`https://api.giphy.com/v1/gifs/random?api_key=KEUGhzQUXgkembqdcvT9ISW6HHRvlCPU&tag=${dataJSON.days[0].conditions}`)
             .then(function(response) {
@@ -50,26 +53,49 @@ function getNamedDay(date) {
     return dayName;
 }
 
+function getConditionEmoji(condition) {
+    if (condition.includes('Sunny') || condition.includes('Clear') || condition == 'Partially cloudy') {
+        return '☀️';
+    } else if (condition.includes('cloudy') || condition.includes('Clear') || condition == 'Cloudy' || condition == 'Overcast') {
+        return '🌤️';
+    } else if (condition.includes('Rain') || condition.includes('rain') || condition == 'Cloudy' || condition == 'Showers' || condition == 'Drizzle') {
+        return '🌧️';
+    } else if (condition.includes('Thunderstorm')) {
+        return '⛈️';
+    } else if (condition.includes('Snow') || condition.includes('snow') || condition == 'Freezing' || condition == 'Sleet' || condition == 'Ice') {
+        return '🌨️';
+    } else if (condition.includes('Fog') || condition == 'Mist' || condition == 'Haze' || condition == 'Windy' || condition == 'Blowing snow' || condition == 'Blustery') {
+        return '💨';
+    } else if (condition == 'Rain and snow' || condition == 'Snow and fog' || condition == 'Light rain and snow' || condition == 'Drizzle and fog') {
+        return '🌪️';
+    }
+}
+
 function changeFollowingDays(dataJSON) {
     nextDay1.textContent = getNamedDay(dataJSON.days[1].datetime);
-    nextDayTemp1.textContent = `${dataJSON.days[1].temp} ${temperatureZone}`;
+    nextDayTemp1.textContent = `${dataJSON.days[1].temp} ${temperatureZone} ${getConditionEmoji(dataJSON.days[1].conditions)}`;
     nextDayCondition1.textContent = dataJSON.days[1].conditions;
+    nextDate1.textContent = dataJSON.days[1].datetime;
 
     nextDay2.textContent = getNamedDay(dataJSON.days[2].datetime);
-    nextDayTemp2.textContent = `${dataJSON.days[2].temp} ${temperatureZone}`;
+    nextDayTemp2.textContent = `${dataJSON.days[2].temp} ${temperatureZone} ${getConditionEmoji(dataJSON.days[2].conditions)}`;
     nextDayCondition2.textContent = dataJSON.days[2].conditions;
+    nextDate2.textContent = dataJSON.days[2].datetime;
 
     nextDay3.textContent = getNamedDay(dataJSON.days[3].datetime);
-    nextDayTemp3.textContent = `${dataJSON.days[3].temp} ${temperatureZone}`;
+    nextDayTemp3.textContent = `${dataJSON.days[3].temp} ${temperatureZone} ${getConditionEmoji(dataJSON.days[3].conditions)}`;
     nextDayCondition3.textContent = dataJSON.days[3].conditions;
+    nextDate3.textContent = dataJSON.days[3].datetime;
 
     nextDay4.textContent = getNamedDay(dataJSON.days[4].datetime);
-    nextDayTemp4.textContent = `${dataJSON.days[4].temp} ${temperatureZone}`;
+    nextDayTemp4.textContent = `${dataJSON.days[4].temp} ${temperatureZone} ${getConditionEmoji(dataJSON.days[4].conditions)}`;
     nextDayCondition4.textContent = dataJSON.days[4].conditions;
+    nextDate4.textContent = dataJSON.days[4].datetime;
 
     nextDay5.textContent = getNamedDay(dataJSON.days[5].datetime);
-    nextDayTemp5.textContent = `${dataJSON.days[5].temp} ${temperatureZone}`;
+    nextDayTemp5.textContent = `${dataJSON.days[5].temp} ${temperatureZone} ${getConditionEmoji(dataJSON.days[5].conditions)}`;
     nextDayCondition5.textContent = dataJSON.days[5].conditions;
+    nextDate5.textContent = dataJSON.days[5].datetime;
 }
 
 let temperatureZone = '°C';
@@ -80,15 +106,6 @@ const todayDegrees = document.querySelector('#today-degrees');
 const todayWeather = document.querySelector('#todays-weather');
 const todaySentence = document.querySelector('#today-sentence');
 const gifImage = document.querySelector('img');
-
-searchBar.addEventListener("blur", () => {
-    console.log(searchBar.value);
-});
-
-searchButton.addEventListener("click", () => {
-    getWeatherData(searchBar.value);
-    localStorage.setItem("cityInfo", searchBar.value);
-});
 
 const nextDay1 = document.querySelector('#next-day1');
 const nextDay2 = document.querySelector('#next-day2');
@@ -108,7 +125,23 @@ const nextDayCondition3 = document.querySelector('#next-day-condition3');
 const nextDayCondition4 = document.querySelector('#next-day-condition4');
 const nextDayCondition5 = document.querySelector('#next-day-condition5');
 
-// getWeatherData(New York);
+const todayDate = document.querySelector('#todays-date');
+const nextDate1 = document.querySelector('#nextday-date1');
+const nextDate2 = document.querySelector('#nextday-date2');
+const nextDate3 = document.querySelector('#nextday-date3');
+const nextDate4 = document.querySelector('#nextday-date4');
+const nextDate5 = document.querySelector('#nextday-date5');
+
+searchBar.addEventListener("blur", () => {
+    console.log(searchBar.value);
+});
+
+searchButton.addEventListener("click", () => {
+    getWeatherData(searchBar.value);
+    localStorage.setItem("cityInfo", searchBar.value);
+});
+
+getWeatherData('New York');
 
 if (localStorage.getItem("cityInfo")) {
     getWeatherData(localStorage.getItem("cityInfo"));
