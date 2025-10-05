@@ -35,7 +35,40 @@ function changeTodayWeather(dataJSON) {
                 gifImage.style.display = 'none';
             });
 
-// fetch('https://api.giphy.com/v1/gifs/random?api_key=KEUGhzQUXgkembqdcvT9ISW6HHRvlCPU&tag=cats')
+    changeFollowingDays(dataJSON)
+}
+
+function getNamedDay(date) {
+    const newDate = new Date(date);
+
+    const dayIndex = newDate.getDay();
+
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const dayName = days[dayIndex];
+
+    return dayName;
+}
+
+function changeFollowingDays(dataJSON) {
+    nextDay1.textContent = getNamedDay(dataJSON.days[1].datetime);
+    nextDayTemp1.textContent = `${dataJSON.days[1].temp} ${temperatureZone}`;
+    nextDayCondition1.textContent = dataJSON.days[1].conditions;
+
+    nextDay2.textContent = getNamedDay(dataJSON.days[2].datetime);
+    nextDayTemp2.textContent = `${dataJSON.days[2].temp} ${temperatureZone}`;
+    nextDayCondition2.textContent = dataJSON.days[2].conditions;
+
+    nextDay3.textContent = getNamedDay(dataJSON.days[3].datetime);
+    nextDayTemp3.textContent = `${dataJSON.days[3].temp} ${temperatureZone}`;
+    nextDayCondition3.textContent = dataJSON.days[3].conditions;
+
+    nextDay4.textContent = getNamedDay(dataJSON.days[4].datetime);
+    nextDayTemp4.textContent = `${dataJSON.days[4].temp} ${temperatureZone}`;
+    nextDayCondition4.textContent = dataJSON.days[4].conditions;
+
+    nextDay5.textContent = getNamedDay(dataJSON.days[5].datetime);
+    nextDayTemp5.textContent = `${dataJSON.days[5].temp} ${temperatureZone}`;
+    nextDayCondition5.textContent = dataJSON.days[5].conditions;
 }
 
 let temperatureZone = '°C';
@@ -53,3 +86,23 @@ searchBar.addEventListener("blur", () => {
 searchButton.addEventListener("click", () => {
     getWeatherData(searchBar.value);
 });
+
+const nextDay1 = document.querySelector('#next-day1');
+const nextDay2 = document.querySelector('#next-day2');
+const nextDay3 = document.querySelector('#next-day3');
+const nextDay4 = document.querySelector('#next-day4');
+const nextDay5 = document.querySelector('#next-day5');
+
+const nextDayTemp1 = document.querySelector('#next-day-degrees1');
+const nextDayTemp2 = document.querySelector('#next-day-degrees2');
+const nextDayTemp3 = document.querySelector('#next-day-degrees3');
+const nextDayTemp4 = document.querySelector('#next-day-degrees4');
+const nextDayTemp5 = document.querySelector('#next-day-degrees5');
+
+const nextDayCondition1 = document.querySelector('#next-day-condition1');
+const nextDayCondition2 = document.querySelector('#next-day-condition2');
+const nextDayCondition3 = document.querySelector('#next-day-condition3');
+const nextDayCondition4 = document.querySelector('#next-day-condition4');
+const nextDayCondition5 = document.querySelector('#next-day-condition5');
+
+// getWeatherData(New York);
