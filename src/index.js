@@ -14,6 +14,7 @@ async function getJSONData(data) {
 }
 
 function changeTodayWeather(dataJSON) {
+    nameOfCity.textContent = localStorage.getItem("cityInfo");
     todayDegrees.textContent = `${dataJSON.days[0].temp} ${temperatureZone}`;
     todayWeather.textContent = dataJSON.days[0].conditions;
     todaySentence.textContent = dataJSON.description;
@@ -72,6 +73,7 @@ function changeFollowingDays(dataJSON) {
 }
 
 let temperatureZone = '°C';
+const nameOfCity = document.querySelector('#name-of-city');
 const searchBar = document.querySelector('#search-city');
 const searchButton = document.querySelector('#search-button');
 const todayDegrees = document.querySelector('#today-degrees');
@@ -85,6 +87,7 @@ searchBar.addEventListener("blur", () => {
 
 searchButton.addEventListener("click", () => {
     getWeatherData(searchBar.value);
+    localStorage.setItem("cityInfo", searchBar.value);
 });
 
 const nextDay1 = document.querySelector('#next-day1');
@@ -106,3 +109,7 @@ const nextDayCondition4 = document.querySelector('#next-day-condition4');
 const nextDayCondition5 = document.querySelector('#next-day-condition5');
 
 // getWeatherData(New York);
+
+if (localStorage.getItem("cityInfo")) {
+    getWeatherData(localStorage.getItem("cityInfo"));
+}
