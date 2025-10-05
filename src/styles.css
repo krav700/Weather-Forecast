@@ -63,3 +63,51 @@ h6 {
 }
 
 /* End of CSS reset */
+
+body, html {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   height: 100%;
+   font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.upcoming-weather-cards {
+  display: grid;
+  grid-template-columns: repeat(5, 200px);
+  grid-template-rows: 150px;
+  gap: 1rem;
+}
+
+.content {
+  width: 90vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.todays-weather {
+  
+}
+
+.middle-row {
+
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 2fr, 1fr;
+  grid-template-rows: 400px;
+  gap: 1rem;
+}
+
+.content > * {
+  margin-bottom: 1rem;
+}
+
+img {
+  align-self: center;
+  width: 480px;
+  height: 400px;
+  border-radius: 100px;
+}
