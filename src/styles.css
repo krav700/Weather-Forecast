@@ -88,6 +88,7 @@ body, html {
   grid-template-columns: repeat(5, 200px);
   grid-template-rows: 150px;
   gap: 1rem;
+  margin-top: 1rem;
 }
 
 .content {
@@ -177,6 +178,7 @@ img {
   padding: 3rem;
   border-radius: 2rem;
   background: var(--bg-color-dark);
+  padding-bottom: 2rem;
 }
 
 .searchImg {
