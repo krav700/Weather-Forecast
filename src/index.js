@@ -1,15 +1,18 @@
 import "./styles.css";
+import searchPNG from "./images/search.svg";
+
+const newImg = document.createElement('img');
+newImg.src = searchPNG;
+newImg.classList.add('searchImg');
 
 async function getWeatherData(city) {
+    document.body.style.cursor = 'wait';
     const data = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?unitGroup=metric&key=L5S7C5P48ERSWGVPQ5B838GE7`);
-    console.log(data);
     getJSONData(data);
 }
 
 async function getJSONData(data) {
     const jsonData = await data.json();
-    console.log(jsonData);
-    console.log(jsonData.days[0].tempmax);
     changeTodayWeather(jsonData);
 }
 
@@ -30,9 +33,8 @@ function changeTodayWeather(dataJSON) {
                 return response.json();
             })
             .then(function(response) {
-                console.log(response);
-                console.log(gifImage);
                 gifImage.src = response.data.images.original.url;
+                document.body.style.cursor = 'default';
             })
             .catch(function(error) {
                 console.log(error);
@@ -132,9 +134,7 @@ const nextDate3 = document.querySelector('#nextday-date3');
 const nextDate4 = document.querySelector('#nextday-date4');
 const nextDate5 = document.querySelector('#nextday-date5');
 
-searchBar.addEventListener("blur", () => {
-    console.log(searchBar.value);
-});
+searchButton.appendChild(newImg);
 
 searchButton.addEventListener("click", () => {
     getWeatherData(searchBar.value);

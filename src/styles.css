@@ -64,6 +64,14 @@ h6 {
 
 /* End of CSS reset */
 
+:root {
+  --bg-color-dark: hsl(50, 100%, 80%);
+  --bg-color: hsl(50, 100%, 60%);
+  --bg-color-light: hsl(50, 100%, 40%);
+
+  --text-color: hsl(50, 15%, 15%);
+}
+
 body, html {
    display: flex;
    flex-direction: column;
@@ -72,6 +80,7 @@ body, html {
    height: 100%;
    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
    background: linear-gradient(hsl(52, 100%, 50%), hsl(45, 100%, 50%));
+   color: var(--text-color);
 }
 
 .upcoming-weather-cards {
@@ -82,11 +91,12 @@ body, html {
 }
 
 .content {
-  width: 90vw;
+  width: 1160px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  box-shadow: inset 0px 0px 15px black;
 }
 
 .middle-row {
@@ -117,6 +127,11 @@ img {
   box-shadow: 0px 3px 3px black;
   background: #FFF;
   transition: 500ms;
+  background: var(--bg-color);
+}
+
+.todays-weather {
+  width: 600px;
 }
 
 .todays-weather:hover, .weather-card:hover {
@@ -126,13 +141,49 @@ img {
 }
 
 #search-city {
-  width: 500px;
+  width: 600px;
+  height: 30px;
   border-radius: 1rem;
-  border: 1px solid gray;
+  border: 1px solid var(--bg-color-light);
   padding-left: 0.5rem;
+
+}
+
+#search-button {
+  border-radius: 2rem;
+  background: none;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 1px solid var(--bg-color-light);
+  position: relative;
+  top: 5px;
+  cursor: pointer;
+}
+
+#search-button:hover {
+  border: 1px solid var(--bg-color);
 }
 
 .card-date {
   justify-self: end;
   align-self: end;
+  color: rgb(50, 46, 46);
+}
+
+.content {
+  border: 1px solid black;
+  padding: 3rem;
+  border-radius: 2rem;
+  background: var(--bg-color-dark);
+}
+
+.searchImg {
+  position: absolute;
+  width: 1rem;
+  height: 1.5rem;
+}
+
+.search-section {
+  position: relative;
+  margin-bottom: 2rem;
 }
