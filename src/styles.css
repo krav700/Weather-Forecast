@@ -146,7 +146,7 @@ img {
   border-radius: 1rem;
   border: 1px solid var(--bg-color-light);
   padding-left: 0.5rem;
-
+  box-shadow: 0px 0px 2px black;
 }
 
 #search-button {
@@ -158,10 +158,12 @@ img {
   position: relative;
   cursor: pointer;
   align-self: center;
+  box-shadow: 0px 0px 2px black;
 }
 
 #search-button:hover {
   border: 1px solid var(--bg-color);
+  box-shadow: 0px 0px 5px var(--text-color);
 }
 
 .card-date {
@@ -192,4 +194,8 @@ img {
 form {
   display: flex;
   gap: 0.5rem;
+}
+
+#gifImage {
+  box-shadow: 0px 0px 5px black;
 }
