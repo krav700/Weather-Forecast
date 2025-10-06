@@ -156,8 +156,8 @@ img {
   height: 1.75rem;
   border: 1px solid var(--bg-color-light);
   position: relative;
-  top: 5px;
   cursor: pointer;
+  align-self: center;
 }
 
 #search-button:hover {
@@ -186,4 +186,9 @@ img {
 .search-section {
   position: relative;
   margin-bottom: 2rem;
+}
+
+form {
+  display: flex;
+  gap: 0.5rem;
 }
