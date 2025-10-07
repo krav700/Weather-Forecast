@@ -7,7 +7,7 @@ newImg.classList.add('searchImg');
 
 async function getWeatherData(city) {
     document.body.style.cursor = 'wait';
-    const data = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?unitGroup=metric&key=L5S7C5P48ERSWGVPQ5B838GE7`);
+    const data = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?unitGroup=${tempSystem}&key=L5S7C5P48ERSWGVPQ5B838GE7`);
     getJSONData(data);
 }
 
@@ -101,6 +101,7 @@ function changeFollowingDays(dataJSON) {
 }
 
 let temperatureZone = '°C';
+let tempSystem = 'metric';
 const nameOfCity = document.querySelector('#name-of-city');
 const searchBar = document.querySelector('#search-city');
 const searchButton = document.querySelector('#search-button');
@@ -133,6 +134,24 @@ const nextDate2 = document.querySelector('#nextday-date2');
 const nextDate3 = document.querySelector('#nextday-date3');
 const nextDate4 = document.querySelector('#nextday-date4');
 const nextDate5 = document.querySelector('#nextday-date5');
+
+const changeTemp = document.querySelector('#C-F');
+const celcius = document.querySelector('#Celsius');
+const fahrenheit = document.querySelector('#Fahrenheit');
+changeTemp.addEventListener('click', () => {
+    if (celcius.classList.contains('active')) {
+        celcius.classList.toggle('active');
+        fahrenheit.classList.toggle('active');
+        temperatureZone = '°F';
+        tempSystem = 'us';
+    } else {
+        celcius.classList.toggle('active');
+        fahrenheit.classList.toggle('active');
+        temperatureZone = '°C';
+        tempSystem = 'metric';
+    }
+    getWeatherData(localStorage.getItem("cityInfo"));
+});
 
 searchButton.appendChild(newImg);
 

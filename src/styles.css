@@ -201,3 +201,13 @@ form {
 #gifImage {
   box-shadow: 0px 0px 5px black;
 }
+
+#C-F {
+  color: var(--bg-color-light);
+  cursor: pointer;
+}
+
+.active {
+  color: hsl(47, 100%, 42%);
+  font-size: 1.2rem;
+}
